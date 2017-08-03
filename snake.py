@@ -2,7 +2,7 @@ import turtle
 import random
 
 turtle.tracer(1,0)
-
+turtle.bgcolor("white")
 SIZE_X=800
 SIZE_Y=500
 turtle.setup(SIZE_X, SIZE_Y)
@@ -18,14 +18,15 @@ food_pos = []
 food_stamps = []
 
 snake = turtle.clone()
-snake.shape("square")
+snake.shape("circle")
+snake.color("light blue")
 
 turtle.hideturtle()
 ##foodimage stup
-turtle.register_shape("trash.gif")
+turtle.register_shape("guitar.gif")
 
 food = turtle.clone()
-food.shape("trash.gif")
+food.shape("guitar.gif")
 food.hideturtle()
 
 for START_LENGTH in range(1):
@@ -86,8 +87,8 @@ turtle.listen()
 def make_food():
     min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
     max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
 
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
@@ -95,8 +96,16 @@ def make_food():
     food.goto(food_x,food_y)
     new_food = (food_x,food_y)
     food_pos.append(new_food)
+
+    if new_food in pos_list:
+        make_food()
+        print("Food will appear in some place")
+
     food_ID=food.stamp()
     food_stamps.append(food_ID)
+
+    
+        
  
 
 

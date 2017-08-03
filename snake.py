@@ -28,7 +28,7 @@ food = turtle.clone()
 food.shape("trash.gif")
 food.hideturtle()
 
-for START_LENGTH in range(6):
+for START_LENGTH in range(1):
     x_pos=snake.pos()[0]
     y_pos=snake.pos()[1]
 
@@ -140,14 +140,20 @@ def move_snake():
         print("You have eaten the food!")
         make_food()
 
-    old_stamp = stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
-    pos_list.pop(0)
+    
+    else:
+        old_stamp = stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
 
     new_pos = snake.pos()
     new_x_pos = new_pos[0]
     new_y_pos = new_pos[1]
 
+    if snake.pos() in pos_list[0:-1]:
+        print('You ate yourself! Game over!')
+        quit()
+    
     if new_x_pos >= RIGHT_EDGE:
         print("You hit the right edge! Game over!")
         quit()
@@ -175,6 +181,8 @@ move_snake()
 ##    food.goto(this_food_pos)
 ##    food_ID = food.stamp()
 ##    food_stamps.append(food_ID)
+
+
 
 
 
